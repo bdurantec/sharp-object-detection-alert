@@ -81,8 +81,6 @@ pip install -r requirements.txt
 ```env
 GOOGLE_DRIVE_VIDEO_LINK = "https://drive.google.com/uc?id=ID_GOOGLE_DRIVE_VIDEO"
 ALERT_CONTACT_EMAIL = ""
-YOLO_FRAME_INTERVAL = "30"
-YOLO_CONFIDENCE = "0.6"
 ```
 
 **_The project has mandatory variables not mentioned here in the README for security reasons!_**
@@ -113,6 +111,10 @@ You will receive an email `from: brunodurantec@gmail.com` based on the result of
 - Alert email: When a sharp object is detected in the video.
 - Result notification: When no sharp object is detected.
 - Error notification: When an error occurs during the processing.
+
+### Tips
+
+- Do you want to vary the model, number of frames and the confidence for selection? Access the file `src\infra\yolo_frame_selection.py` and update the variables on the top!
 
 ---
 

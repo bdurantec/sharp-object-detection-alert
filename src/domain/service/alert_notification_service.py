@@ -54,7 +54,7 @@ class AlertNotificationService:
             html_content += f"""
             <p><strong>Detected object:</strong> {self.__email_content.list_image_analysis[i].object_type}</p>
             <p><strong>Description:</strong> {self.__email_content.list_image_analysis[i].details}</p>
-            <img src="cid:image_{i}" alt="Image {i + 1}" style="width:100%; border-radius: 5px; margin-bottom: 10px;"/>
+            <img src="cid:imagem_{i}" alt="Image {i + 1}" style="width:100%; border-radius: 5px; margin-bottom: 10px;"/>
             <hr>
             """
 

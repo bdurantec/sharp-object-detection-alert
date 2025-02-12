@@ -18,28 +18,28 @@ class GmailSMTP:
 
     def send_email(self, email_content: EmailHtmlContent):
         msg = MIMEMultipart()
-        msg['From'] = self.__sender
-        msg['To'] = self.__recipient
-        msg['Subject'] = email_content.subject
+        msg["From"] = self.__sender
+        msg["To"] = self.__recipient
+        msg["Subject"] = email_content.subject
 
-        msg.attach(MIMEText(email_content.html_code, 'html'))
+        msg.attach(MIMEText(email_content.html_code, "html"))
 
         for i, image in enumerate(email_content.list_image_analysis):
             try:
                 if isinstance(image.image_stream, bytes):
                     image_bytes = image.image_stream
                 else:
-                    with open(image.image_stream, 'rb') as img_file:
+                    with open(image.image_stream, "rb") as img_file:
                         image_bytes = img_file.read()
 
-                mime = MIMEBase('image', 'jpeg')
+                mime = MIMEBase("image", "jpeg")
                 mime.set_payload(image_bytes)
                 encoders.encode_base64(mime)
-                mime.add_header('Content-ID', f'<imagem_{i}>')
-                mime.add_header('Content-Disposition', 'inline', filename=f'imagem_{i}.jpg')
+                mime.add_header("Content-ID", f"<imagem_{i}>")
+                mime.add_header("Content-Disposition", "inline", filename=f"imagem_{i}.jpg")
                 msg.attach(mime)
             except Exception as e:
-                print(f'Error attaching image {image.image_stream} to MIME: {e}')
+                print(f"Error attaching image {image.image_stream} to MIME: {e}")
                 raise
 
         try:
@@ -47,7 +47,7 @@ class GmailSMTP:
                 server.starttls()
                 server.login(self.__sender, self.__password)
                 server.sendmail(self.__sender, self.__recipient, msg.as_string())
-                print(f'Email sent successfully to {self.__recipient}!')
+                print(f"Email sent successfully to {self.__recipient}!")
         except Exception as e:
-            print(f'Error sending email: {e}')
+            print(f"Error sending email: {e}")
             raise
